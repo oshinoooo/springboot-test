@@ -2,6 +2,7 @@ package cn.liuyoulong.web.controller;
 
 import cn.liuyoulong.web.dto.User;
 import cn.liuyoulong.web.service.WebService;
+import cn.liuyoulong.web.vo.AddUserRequestVo;
 import cn.liuyoulong.web.vo.Response;
 import cn.liuyoulong.web.vo.UserVo;
 
@@ -24,14 +25,27 @@ public class WebController {
     WebService webService;
 
     @PostMapping("/getUsers")
-    public Response getUsers(@RequestBody UserVo userVo) {
+    public Response getUsers(@RequestBody UserVo vo) {
         try {
-            log.info("getUsers start: {}", userVo);
-            List<User> users = webService.getUsers(userVo);
+            log.info("getUsers start: {}", vo);
+            List<User> users = webService.getUsers(vo);
             log.info("getUsers end");
             return Response.ok(users);
         } catch (Exception e) {
-            log.info("getUsers: {}", e.getMessage());
+            log.info("getUsers error: {}", e.getMessage());
+            return Response.error(e.getMessage());
+        }
+    }
+
+    @PostMapping("/addUsers")
+    public Response addUsers(@RequestBody AddUserRequestVo vo) {
+        try {
+            log.info("addUsers start: {}", vo);
+            boolean status = webService.addUsers(vo);
+            log.info("addUsers end");
+            return Response.ok(status);
+        } catch (Exception e) {
+            log.info("addUsers error: {}", e.getMessage());
             return Response.error(e.getMessage());
         }
     }

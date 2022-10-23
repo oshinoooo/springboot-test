@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface UserService extends IService<User> {
 
-    List<User> selectUser(UserVo userVo);
+    List<User> selectUser(UserVo vo);
 }
