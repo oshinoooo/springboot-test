@@ -6,6 +6,7 @@ import cn.liuyoulong.web.service.UserService;
 import cn.liuyoulong.web.vo.UserVo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public List<User> selectUser(UserVo userVo) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("name", userVo.getName());
-        wrapper.eq("email", userVo.getEmail());
+        wrapper.eq(!StringUtils.isBlank(userVo.getName()), "name", userVo.getName());
         return userMapper.selectList(wrapper);
     }
 }

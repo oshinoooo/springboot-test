@@ -6,7 +6,8 @@ import cn.liuyoulong.web.vo.Response;
 import cn.liuyoulong.web.vo.UserVo;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,8 @@ public class WebController {
     @Resource
     WebService webService;
 
-    @GetMapping("/getUsers")
-    public Response getUsers(UserVo userVo) {
+    @PostMapping("/getUsers")
+    public Response getUsers(@RequestBody UserVo userVo) {
         try {
             log.info("getUsers start: {}", userVo);
             List<User> users = webService.getUsers(userVo);
