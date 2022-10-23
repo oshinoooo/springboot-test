@@ -1,4 +1,26 @@
 package cn.liuyoulong.web.service.impl;
 
-public class WebServiceImpl {
+import cn.liuyoulong.web.dto.User;
+import cn.liuyoulong.web.service.UserService;
+import cn.liuyoulong.web.service.WebService;
+import cn.liuyoulong.web.vo.UserVo;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+@Slf4j
+@Service
+public class WebServiceImpl implements WebService {
+
+    @Resource
+    UserService userService;
+
+    @Override
+    public List<User> getUsers(UserVo userVo) {
+        return userService.selectUser(userVo);
+    }
 }
